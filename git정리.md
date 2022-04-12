@@ -41,13 +41,13 @@ $ git remote -v (주소연결확인해보고 정상이라면)
 $ git push origin master
 ```
 
-​	
-
-1.  순서가 있는항목
-2.  항목 2개
-   1. ​	첫번째
-   2. ​    두번째
-3. 연습중
-   1. 첫번째
-   2. 두번째
-   3. 세번쨰
+## Git Clone ,Pull
+1. Clone 
+   * git clone 주소 (git init 이되있는 폴더 자체를 복제해 온다)
+2. Pull
+   * git pull origin (branch명) 보통 master branch 내용을 가지고온다.
+## Git Branch (switch,checkout,merge)
+1. 브랜치 생성
+   1. git branch (생성할branch명)
+   2. git branch (현재 어느브랜치위치인지 확인 해보기)
+   3. git switch (이동할브랜치명) == git checkout (이동할브랜치명)
