@@ -2,7 +2,7 @@
 
 ## BE 개발자
 
-link:[채용공고 모음] https://github.com/dakdlzhf/TIL/wiki/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EB%A6%AC%EC%84%9C%EC%B9%98
+link:[채용공고 모음](https://github.com/dakdlzhf/TIL/wiki/%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EB%A6%AC%EC%84%9C%EC%B9%98)
 
 ### 자격 요건 분석
 * java ,javasciprt Spring, jsp ,가능/경험자
