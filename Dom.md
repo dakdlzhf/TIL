@@ -106,6 +106,20 @@ function myFunction() {
 </body>
 </html>
 ```
+### :star: TIP
+
+
+
+* document.all VS document.getElementById , document.getElementsByTagName
+
+  * 결론적으로 document.all 은 모든 HTML,HEAD ,TITLE 태그까지 모두 참조하기떄문에 느리다.
+  * 대체로.document.getElementById  와 document.getElementsByTagName를 사용하여 유일한 id 값만 골라서 참조하는것이 좋다고 생각든다. 또한 W3C 에서 표준으로 정한 탐색 스크립트이기에 브라우저 호환성이 보장된다! 
+  * document.getElementsByTagName 은  document.getElementById  와 쌍대산맥 ? 을이루는 유명한 문법이지만 두가지 차이점이 존재한다
+    1) 하나 이상의 요소 즉 요소의 배열을 반환한다. getElementsByName 이 반환하는 요소가 단 1개라도 배열 접근 형식 element[0] 을 해야한다.
+    2) 요소에 부여된 ID 가 아닌 태그에 기반한다 getElementById 가 요소에 부여된 ID 를 기반으로 탐색한다면 getElementsByTagName 은 요소의 태그명에 기반한다 (div,sapn,img)  와같은 요소태그 !
+
+  
+
 
 
 
