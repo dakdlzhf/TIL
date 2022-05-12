@@ -1,4 +1,4 @@
-# 기억보다 기록을 ! 1일 1 Commit challenge
+# 기억보다 기록을 ! 1 day 1 Commit Challenge
 
 ## :rocket: 매일 배운것을 복습하며 기록하기 위한 도전!
 
