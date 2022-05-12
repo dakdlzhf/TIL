@@ -71,7 +71,7 @@ splice 함수는 배열의 기존요소들을 추가/삭제/교체 하거나 변
             console.log(arr); //[ 'B', 'A', 1, 2, 3 ]
 
             arr.splice(0, 0, 'C');
-            console.log(arr); //[ 'C', 'B', 'A', 1, 2, 3 ]
+             console.log(arr); //[ 'C', 'B', 'A', 1, 2, 3 ]
         }
     </script>
 </head>
