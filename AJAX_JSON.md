@@ -1,4 +1,4 @@
-## 동기처리 와 비동기처리 
+##:rocket: 동기처리 와 비동기처리 
 
 ### Synchronous
 
@@ -142,7 +142,7 @@ document.getElementById("status").innerHTML = currentState;
 
 
 
-## JSON
+## :rocket: JSON
 
 JSON.stringify = 객체를 JSON 으로 바꿔서 직렬화시킨다
 
