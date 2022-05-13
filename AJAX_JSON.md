@@ -1,4 +1,4 @@
-##:rocket: 동기처리 와 비동기처리 
+## :rocket: 동기처리 와 비동기처리 
 
 ### Synchronous
 
