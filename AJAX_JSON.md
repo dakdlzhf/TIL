@@ -120,7 +120,7 @@ document.getElementById("status").innerHTML = currentState;
 
 
 
-:rocket: <u> readyState 의 상태를 Switch 문으로 작성하여 HTML 에 표기하여 확인할수도</u>
+:star: <u> readyState 의 상태를 Switch 문으로 작성하여 HTML 에 표기하여 확인할수도</u>
 
 ​      <u>javaSciprt console.log 로도 확인 가능 하다.</u>
 
