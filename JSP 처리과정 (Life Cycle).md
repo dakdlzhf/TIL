@@ -40,3 +40,45 @@
 
 :star: JSP 코드는 톰캣 서버에서 Life Cycle 을 통해 처리된후 브라우저에 응답
 
+:star: **선언문 에서 작성된 변수는 객체 안에 멤버 변수라 jsp 가 수정되기전까진 값 유지!**
+
+:star: **스크립트릿 에서 작성된 변수는 jspService () 함수내에 지역변수라 호출시마다 값이 초기화!**
+
+### 직접 코드를 살펴보자
+
+```javascript
+<body>
+	<%! // class 파일이생성되면 메모리에 객체를 생성 이때 객체의 멤버변수 ,멤버메서드 를 정의하는 선언문
+    
+	private int num1 = 0; //객체 내부 전역변수( 멤버변수 )
+
+	public void jspInit() { //오버라이딩
+
+		System.out.println("jspInit() 호출됨");
+	}
+
+	public void jspDestroy() { //오버라이딩
+		System.out.println("jspDestroy() 호출됨");
+        
+	}%>
+
+	<% // 생성된 객체의 jspServic ( ) 함수 내부 코드 스크립트릿 
+	
+	int num2 = 0; // 함수 내부 지역변수
+	num1++;
+	num2++;
+	
+	
+	%>
+        
+	<ul>
+		<li>num1 : <%= num1 %> </li> <!-- 표현식 --> 
+		<li>num2 : <%= num2 %> </li>
+	</ul>
+
+</body>
+```
+
+* 톰캣서버를 동작하여 jsp 요청 을 하면 num1 의 값은 증가하고 num2 의값은 증가하지않는다
+  * 다만 jsp 파일이 수정된다면 객체를 제거후 다시 생성하기떄문에 멤버변수인 num1 도 초기화된다.
+
