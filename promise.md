@@ -170,3 +170,84 @@ userStorage
 
  Promise 를 사용함으로써 코드의 가독성이 좋아지고 좀더 직관적으로 코드를 해석할수 있어진다.
 
+## Promise 의 특성을 이용해보자!!!
+
+* Promise 는 미래의 성공값,실패값 을 약속한다고했다 . 
+
+  * 그값을 then 메서드로 resolve , reject 에 접근하여 값을 확인할수있다고 했었다 
+
+    ? 그러면 async 함수로 Promise 를반환받은후 --> 그것을 then 대신 await 을사용 한다면? 
+
+  :heart_eyes:  독립적인 처리기능을 순차적으로 하는대신 병렬 처리로 더빠르게 실행할수 있는 코드를 만들수 있지않을까 ????
+
+:heavy_exclamation_mark:  병렬처리 전 코드
+
+```:heavy_check_mark:
+async function pickFruits() {
+   try {
+     const apple = await getApple();
+     const banana = await getBanana();
+     return `${apple} + ${banana}`;
+  } catch {
+     console.log(new Error('error')); 
+   }
+ }
+```
+
+:heavy_exclamation_mark: 병렬처리 코드~
+
+```javascript
+ async function pickFruits() {
+   const applePromise = getApple(); //Promise 리턴, 바로 promise 실행
+   const banaaPromise = getBanana(); //Promise 리턴, 바로 promise 실행
+   const apple = await applePromise;
+   const banana = await banaaPromise;
+   return `${apple} + ${banana}`;
+ }
+```
+
+개발자 도구로 네트워크 처리 속도로 정확히 확인도 가능하지만 체감상 더빠르게 처리가되는걸 확인할수 있다.!
+
+
+
+:heavy_check_mark: 병렬처리를 좀더 개선한 코드 ( 알아두면 좋다 )
+
+* **Promise.all( [ ] )**
+
+```javascript
+function pickFruits(){
+    return Promise.all([getApple(),getBanana()])
+    .then((frutis)=>frutis.join('+'));
+}
+pickFruits().then(console.log);
+```
+
+  ***열 형태로 함수를 넣어주면 반복문을 돌린것 처럼  배열로 병렬처리를 한다.***
+
+
+
+* **Promise.race( [ ] )**
+
+  ```javascript
+  async function getApple() {
+    await delay(2000);  // 2초
+    return "apple";
+  }
+  async function getBanana() {
+    await delay(1000);  // 1초
+    return "banana";
+  }
+  
+  function pickOnlyOne() {
+    return Promise.race([getApple(), getBanana()]);
+  }
+   
+  pickOnlyOne().then(console.log);
+  
+  // getBnana 의 resolve 가 출력된다!
+  ```
+
+  
+
+  *  먼저 수행되는 처리결과를 하나만 가져온다! 
+
