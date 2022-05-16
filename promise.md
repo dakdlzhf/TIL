@@ -24,7 +24,7 @@
 
 ```javascript
 const promise = new Promise((resolve, reject) =>{ 
-
+                //지금 상태가 pendding 상태이다.
   });
 ```
 
