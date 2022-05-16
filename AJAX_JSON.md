@@ -130,8 +130,6 @@ document.getElementById("status").innerHTML = currentState;
 
 
 
-		## status
-
 * status 프로퍼티는 서버로부터 도착한 응답의 상태 값을 나타낸다 그값은 
 
   	 1) 서버로부터 도착한 응답의 상태값을 나타낸다.
