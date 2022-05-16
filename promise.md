@@ -71,3 +71,102 @@ const promise = new Promise((resolve,reject)=>{
 
 then 메서드는 값 또는 promise 객체가 전달된다.
 
+:white_check_mark:  Callback Hell  코드를 Promise 로 리팩토링 하는 과정을 살펴 본다
+
+
+
+*  Promise 를 사용하지않고 콜백함수로 처리를 할경우 체이닝이 길어지고, 나중에 디버깅이 힘들어진다.
+
+```javascript
+class UserStorage {
+    loginUser(id,password, onSuccess, onError){ //로그인 확인
+        setTimeout(()=>{ //서버역할, 어느정도 시간을 걸리게한다.
+            if (
+                (id === 'study' && password === 'aistudy') ||
+                (id === 'coder' && password === 'academy')
+            ) {
+                onSuccess(id);
+            } else {
+                onError(new Error('not found'))
+            }
+        }, 2000)
+    }
+    getRoles(user, onSuccess, onError){ //사용자 역할 받아오기
+        setTimeout(() => { //서버역할, 어느정도 시간을 걸리게한다.
+            if(user === 'study' ){
+                onSuccess({ name : 'study', role : 'admin'});
+            } else {
+                onError(new Error('no access'))
+            }
+        },1000)
+ 
+    }
+}
+ 
+const userStorage = new UserStorage();
+const id = prompt('enter your id');
+const password = prompt('enter your password');
+userStorage.loginUser(
+    id, 
+    password, 
+    user => {
+        userStorage.getRoles(
+            user,
+            userWithRole => {
+                alert(`hello ${userWithRole.name}, you have a ${userWithRole.role} role`);
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }, 
+    error => { console.log(error)}
+);
+```
+
+:heavy_exclamation_mark: Promise 사용 후
+
+```javascript
+	class UserStorage {
+    loginUser(id,password){
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                if (
+                    (id === 'study' && password === 'aistudy') ||
+                    (id === 'coder' && password === 'academy')
+                ) {
+                    resolve(id);
+                } else {
+                    reject(new Error('not found'))
+                }
+            }, 2000);
+ 
+        });  
+    }
+    getRoles(user) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if(user === 'study' ){
+                    resolve({ name : 'study', role : 'admin'});
+                } else {
+                    reject(new Error('no access'))
+                }
+            },1000);
+        });
+ 
+    }     
+ 
+}
+ 
+const userStorage = new UserStorage();
+const id = prompt('enter your id');
+const password = prompt('enter your password');
+userStorage
+    .loginUser(id, password) //로그인 성공하면 id 전달
+    .then(userStorage.getRoles) //id의 역할을 전달
+    .then(user => alert(`Hello ${user.name}, you have a ${user.role} role`)) //역할 확인
+    .catch(console.log); //문제발생시 오류출력
+```
+
+ Promise 를 사용함으로써 코드의 가독성이 좋아지고 좀더 직관적으로 코드를 해석할수 있어진다.
+
