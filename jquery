@@ -99,3 +99,49 @@ $('#element').removeAttr('id', '[id 명]');
 $el.removeAttr('id', 'wrapBackground');
 ```
 
+***
+
+### :star: $("태그 :empty")
+
+* 태그에 text 가 비어있는 element 에 css 로 style을 변경하고 text 를 추가해보자
+
+
+
+```javascript
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title></title>
+<style></style>
+<script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+<script>
+$(function () {
+    $("td:empty").text("Was empty").css("background","rbg(255,200,200)");
+});
+</script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>TD #0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>TD #2</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>TD#5</td>
+        </tr>
+    </table>
+
+</body>
+</html>
+```
+
+
+
+이런게 있구나 정도만 알아두자!
