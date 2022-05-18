@@ -143,5 +143,69 @@ $(function () {
 ```
 
 
+***
 
-이런게 있구나 정도만 알아두자!
+### :star: nth-child() 와 eq() 의 차이점
+
+* $( "ul li:nth-child(2)" ).append( "<span> - 2nd!</span>" )
+  *    ul 태그 안에 자식 태그 li  2번째  태그에 2nd! 문자열을 추가한다
+
+* $( "ul li" ).eq(2).append( "<span> - 3nd!</span>" )
+  *  ul 태그 안에 자식태그 li 에 3번째 태그에 3nd! 문자열을 추가한다
+    * .eq( 2 ) 는 index 번호로 사용되어 eq( ) 를사용할때 순서를 0부터 생각해야한다.  
+
+​	`예제`
+
+```javascript
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>nth-child demo</title>
+  <style>
+  div {
+    float: left;
+  }
+  span {
+    color: blue;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+ 
+<div>
+  <ul>
+    <li>John</li>
+    <li>Karl</li>
+    <li>Brandon</li>
+  </ul>
+</div>
+<div>
+  <ul>
+    <li>Sam</li>
+  </ul>
+</div>
+<div>
+  <ul>
+    <li>Glen</li>
+    <li>Tane</li>
+    <li>Ralph</li>
+    <li>David</li>
+  </ul>
+</div>
+ 
+<script>
+$( "ul li:nth-child(2)" ).append( "<span> - 2nd!</span>" );
+$( "ul li" ).eq(2).append( "<span> - 3nd!</span>" );
+</script>
+ 
+</body>
+</html>
+```
+
+
+
+***
+
+
