@@ -124,3 +124,38 @@ JSESSIONID : 6F9BBBB7438AD5F25F1C7FD4CB02BEAC
 :heavy_exclamation_mark: 쿠키에 최대크기도 제한이되어있고, 데이터를 문자열로 바꿔서 저장된다.
 
 ​	
+***
+## :star: Cookie 유효시간설정
+
+cookie 를 생성하고 cookie 에 유효시간을 설정해보자
+
+쿠키는 유효시간이 지나면 다시 사용되지 못하며, 브라우저에 저장되는 쿠키는 유효시간이 존재한다.
+
+쿠키의 유효 시간을 따로 설정하지않는다면 '세션 쿠키' 라고 불려지는데 브라우저를 닫기전까지 유지가된다.
+
+하지만 쿠키의 유효시간을 따로 설정한다면 설정한 시간만큼은 브라우저를 닫더라도 유지가된다.
+
+
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    
+<%
+	Cookie cookie3 = new Cookie("oneH","oneH");
+	cookie3.setMaxAge(60*60); 
+	response.addCookie(cookie3);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>유효시간이 지정된 쿠키 생성</title>
+</head>
+<body>
+유효시간이 1시간 짜리 쿠키 생성
+</body>
+</html>
+```
+
