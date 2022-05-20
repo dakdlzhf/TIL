@@ -162,5 +162,39 @@ String 타입 배열 pets 에 request 객체를통해 name 이 pet 인 데이터
 
         .......등 이있다.
 
+***
+
+
+```jsp
+<%
+       String protocol = request.getProtocol();
+       String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String remoteAddr = request.getRemoteAddr();
+        String remoteHost = request.getRemoteHost();
+        String method = request.getMethod();
+        StringBuffer requestURL = request.getRequestURL();
+        String requestURI = request.getRequestURI();
+        String useBrowser = request.getHeader("User-Agent");
+        String fileType = request.getHeader("Accept");
+%>
+
+```
+
+```jsp
+<body>
+프로토콜 : <%=protocol%>
+서버의 이름 : <%=serverName%>
+서버의 포트 번호 :<%=serverPort%>
+사용자 컴퓨터의 주소 : <%=remoteAddr%>
+사용자 컴퓨터의 이름 : <%=remoteHost%>
+사용 method : <%=method%>
+요청 경로(URL) : <%=requestURL%>
+요청 경로(URI) : <%=requestURI%>
+현재 사용하는 브라우저 : <%=useBrowser%>
+브라우저가 지원하는 file의 type : <%=fileType%>
+</body>
+```
+
 
 
