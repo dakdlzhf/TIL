@@ -102,4 +102,59 @@
 
 :boom:<u>**서버 종료시 톰캣이 갖고있던 인스턴스(서블릿)를 어떻게정리하는지까지 알아보았다.**</u>
 
+***
+
+## :star: JSP 지시자 (Diractive)
+
+* JSP 지시자(Directive)
+  * 지시자는 클라이언트의 요청에 JSP 페이지가 실행이 될 때 필요한 정보를
+     JSP 컨테이너에게 알리는 역할한다.
+  * 지시자는 태그 안에서 @으로 시작하며, 3가지 종류가 있다.
+     page, include, taglib	
+
+
+
+1. page 지시자
+    \- jsp페이지에서 지원되는 속성들을 정의하는 것들이다.
+    \- jsp페이지에서 JSP컨테이너에게 해당 페이지를 어떻게 처리할 것인가에
+    대한 페이지 정보를 알려준다.
+
+* `info`
+  * 페이지설명, jsp 페이지 제목을 붙이는 것과 같다.
+* `language`
+  *  Jsp페이지의 스크립트 언어지정 기본값은 Java
+* `contentType`
+  * jsp의 출력 형식 지정, 문자 셋을 지정합니다. 
+
+```jsp
+//형식: contentType="text/html; charset=UTF-8" 
+  <%@ page contentType="text/html; charset=UTF-8" %> 
+
+```
+
+ \- JSP처리 결과가 HTML임으로 MIME Type을 'text/html'과 문자 코드(UTF-8)
+  선언. 
+
+ \- MIME Type: 브러우저가 출력하는 데이터의 종류를 나타낸 코드값, 
+
+ 예) image/jpg는 이미지가 출력됨 
+
+ \- HTML 태그의 META태그도 일치시켜야함(브러우저용). 
+
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+
+ <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR"> 
+
+* `import`
+
+  * 패키지의 import, 중복 사용가능 
+
+      자바에서 패키지를 사용하겠다고 선언하는 것과 같다
+
+  ```jsp
+   <%@ page import="java.util.*" %>
+  ```
+
+  
+
 
