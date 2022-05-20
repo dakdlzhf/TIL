@@ -1,5 +1,21 @@
 # :rocket: JSP
 
+### JSP 페이지 내장객체
+
+| 내장객체    | 리턴타입                               | 설명                                                         |
+| ----------- | -------------------------------------- | ------------------------------------------------------------ |
+| request     | javax.servlet.http.HttpServletRequest  | 웹 브라우저의 요청 정보를 저장하는 객체                      |
+| response    | javax.servlet.http.HttpServletResponse | 웹 브라우저의 요청에 대한 응답정보를 저장하고있는 객체       |
+| out         | javax.servlet.jsp.jsp.jspWriter        | JSP 페이지에 출력할 내용을 가지고 있는 출력 스트림 객체      |
+| sesseion    | javax.servlet.http.HttpSession         | 하나의 웹 브라우저의 정보를 유지하기위한 세션정보를 저장하는 객체 |
+| application | javax.servlet.ServletContext           | 웹 어플리케이션에 대한 정보를 저장합니다.                    |
+| config      | Javax.servlet.ServletConfig            | JSP 페이지에 대한 설정 정보를 저장합니다.                    |
+| page        | javax.lang.Object                      | JSP페이지를 구현한 자바 클래스 인스턴스                      |
+| exception   | javax.lang.Throwable                   | 익셉션 객체, 에러페이지에서만 사용됩니다.                    |
+
+:heavy_exclamation_mark:	기본객체 중에서 exception 기본 객체를 제외한 나머지 8개 기본 객체는 모든 JSP페이지에서 사용할수 있으며, exception 기본 객체는 오직 에러 페이지에서만 사용할수 있다.
+
+
 
 
 ## 1) 스크립트릿
