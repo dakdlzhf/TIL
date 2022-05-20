@@ -154,7 +154,27 @@
   ```jsp
    <%@ page import="java.util.*" %>
   ```
+2. include 지시자
 
+*  여러 jsp페이지에서 공통적으로 포함하는 내용이 있을 때 이러한 내용을
+    매번 입력하지 않고 파일에 저장한 후 JSP파일에 포함해서 실행한다.
+* 처리 결과가 합쳐지는 것이 아니라 파일의 소스가 하나의 파일에 합쳐진
+    다음 실행된다. 
+
+### 2. 액션태그
+
+* JSP 문법이다.
+
+  * 액션태그의 종류는 include, forward, useBean, setProperty, getProperty
+     등이 있다.
+    * useBean, setProperty, getProperty
+      자바빈즈(JavaBeans)와 통신을 위해서 구현한 액션태그 이다.
+  * forward 
+    * 다른페이지로 이동할 때 사용하는 태그이다
+
+  예) 브라우저 요청 -> A.jsp 처리 forwar 액션 을사용하여 B.jsp 로 그대로넘긴다 -> B.jsp 에서 처리하고 ->브라우저로 응답
+
+​			브라우저에 요청은 1번이지만 A.jsp ~ B.jsp 에서 처리처리 된다. B.jsp 에서 응답했지만 URL 을 보면 A.jsp 인것을 확인할수있다.
   
 
 
