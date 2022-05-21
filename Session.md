@@ -106,3 +106,88 @@ Session은 서버에서 생성해준다
 
 서버쪽에서 Session 에 저장해둔다면 훨씬 좋을거다.
 
+***
+
+### 톰캣에 session 유지시간 설정해보기
+
+다이나믹 프로젝트 생성 -> Context Path 후로의 페이지요청 설정
+
+* web.xml 을 생성후 
+
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+    <display-name>jspEx1</display-name>
+    <welcome-file-list>
+      <welcome-file>index.html</welcome-file>
+      <welcome-file>index.htm</welcome-file>
+      <welcome-file>index.jsp</welcome-file>
+      <welcome-file>default.html</welcome-file>
+      <welcome-file>default.htm</welcome-file>
+      <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+    <!--모든페이지의 디폴트값이된다 분단위 세션 유효시간 설정(설정파일 변경시 서버 재시작이 필요하다) -->
+    	<session-config>
+    		<session-timeout>1</session-timeout>
+    	</session-config>	
+  </web-app>
+  ```
+
+  web-app 안에` <session-config>`  안에 `<session-timeout>`  분단위정수 `</session-timeout> `
+
+  값을 주면 모든 페이지에 기본세션유지값으로 설정이된다
+
+  위에 코드는 1분동안 기다렸다가 다시새로고침을 해서 sessionID 를 확인해보면 바뀐걸알수있다.
+
+  1)  web.xlm 에 도 세션의 유지시간 설정을하고,
+  2) jsp 파일을 만든후 해당 jsp 파일에서 session.setMaxInactiveInterval(10) 설정을한다면?
+
+​	답은 jsp페이지 에서 설정한 세션유지시간 10초가 덮어씌어져서 적용된다, 모든페이지의 기본값이 1분이지만 직접설정을한다면 값을
+
+​	바꿀수있다.  	
+
+## :star:session 에 데이터를 저장해보자
+
+
+
+* 서버에서 session 이라는 객체에 session 이 유효한 기간동안 해당 session 에 데이터를 저장할수 있다.
+  1. form 에서 데이터를 입력하고 jsp 요청을한다
+  2. jsp 페이지에서 파라미터로 form데이터를 꺼내서 변수에 담는다 
+  3. 변수에 담은데이터를 세션에 저장한다 `session.setAttribute("saveData", data)`
+  4. 세션에 데이터를 꺼내본다. `session.getAttribute("saveData")`
+
+
+
+sessionData.html
+
+```html
+<body>
+<form action="sessionSave.jsp">
+<input type="text" name="data" />
+<input type="submit" value="전송" />
+</form>
+</body>
+```
+
+
+
+sessionSave.jsp
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    <%
+    	String data =request.getParameter("data");
+    	session.setAttribute("saveData", data); //세션에 저장
+    	
+    	response.sendRedirect("sessionInfo.jsp");
+    %>
+```
+
+sessionInfo.jsp
+
+```jsp
+세션의 저장된 데이터 <%= session.getAttribute("saveData") %>
+```
+
