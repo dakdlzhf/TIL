@@ -435,4 +435,49 @@ DAO 와 Servic 클래스의 목적을 구분하여 DAO 는 DB 와의 접근 로�
 
 
 
-## :rocket:**DAO + Service + DB연동  ( CRUD 3탄)**
+## :rocket:**Oracle DB 연동 CRUD 만들어보기  ( CRUD 3탄)**
+
+
+1) 게시글 정보를 담을 수있는 클래스 정의 (BoardDTO.java)
+
+2) 데이터베이스에 접근하는 클래스 정의(BoardDAO.java)
+
+3) JSP 파일 ( /board/ )
+
+   1) 메인페이지 ( index.jsp ) 
+
+      게시판링크 목록요청
+
+   2) 게시글 목록(list.jsp) 
+
+      글쓰기 링크
+
+   3) 게시글 등록 
+
+      입력폼 응답( registForm.jsp )
+
+      데이터베이스에 등록후 list.jsp 리다이렉트(regist.jsp)
+
+   4) 게시글 보기 ( boardDetail.jsp?num=10)
+
+      데이터베이스에서 해당 게시글을 찾아 브라우저에 응답
+
+   5) 게시글 수정
+
+      입력폼 응답(editForm.jsp?num=10)
+
+      해당 게시글 변경 전 내용 필요
+
+      데이터베이스에 수정 후 boardDetail.jsp 리다이렉트(edit.jsp?num=10)
+
+   6) 게시글 삭제
+
+      게시글 삭제 확인 (deleteForm.jsp?num=10)
+
+      삭제 확인, 취소
+
+      데이터 베이스에서 삭제 후 list.jsp 로 리다이렉트(delete.jsp?num=10)
+
+​			
+
+이제 위처럼 구조를 잡고 만들어 보겠습니다.
