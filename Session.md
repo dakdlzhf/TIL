@@ -200,3 +200,13 @@ sessionInfo.jsp
 세션의 저장된 데이터 <%= session.getAttribute("saveData") %>
 ```
 
+### 💯 요약정리
+
+
+:heavy_check_mark: 클라이언트에 저장시키면 위험한, 민감한 정보들은 세션 (서버) 에다가 저장해 둘수가 있다.
+
+:heavy_check_mark: JSP 에서는 최초 요청 시 내장객체(기본객체)로 세션이 생성된다 ( 이때 Session ID 도 생성된다)
+
+:heavy_check_mark: 세션은 브라우저를 종료 시킨 메시지가 서버에 전달되거나, invalidate() 호출을하여 세션객체가 사라질경우 새로운세션을 생성 응답	   한다.
+
+:heavy_check_mark: 생성된 세션에 setAttribute() ,getAttribute() 를 이용하여 값을 저장하고 꺼낼수있다.
