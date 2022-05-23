@@ -60,3 +60,48 @@
 
 - **지속성 (Durability)** : 지속성은 트랜잭션이 성공적으로 완료된 이후에 데이터베이스의 데이터들이 영구적으로 보존되어야 한다는 의미이다. 
 
+***
+
+### :star: 트랜잭션 의 개념
+
+select 조회는 데이터의 값이 수정되거나 추가되거나 삭제되지않기때문에 트랜잭션이 일어나지않는다고 본다
+
+조작이 이뤄질때 ! 정확히 말하면 테이블에서  insert , update , delete 를 할때를 트랜잭션의 범위에 해당된다.
+
+조작을 시작하는 시점부터 조작을 마무리하는 끝점 마지막점까지가 `트랜잭션의 범위` 다.
+
+트랜잭션을 완료하면 `commit` 을 해서 마무리한다.
+
+트랜잭션을 관리하는 `commit` 과 `rollback` 이 있는데
+
+rollback 은 현재까지의 트랜잭션을 무효화 시키는 개념이다.
+
+`rollback` 은 마지막 `commit` 시점으로 돌아갈수 있는데, 만약 트랜잭션을 정상적으로 `commit`을한후 이어서 update 로 데이터를 수정하는데 잘못하여 모든 name 의 값을 '만득이' 로 바꾸게 되었다고 생각해보자 원하는 결과가 아니라서 다시 일일이 그많은 데이터들을 다시 값을 바꾸게된다면 엄청 힘들것이다. 이때 몇번의 트랜잭션이 일어났다고 하더라도 `rollback`; 를 입력하면 마지막 `commit` 시점으로 즉 update 쿼리문을 입력하기 전 내용의 데이터로 되돌아갈수 있다.!
+
+
+
+
+
+### :star: SQL 
+
+* `Create` 
+  * 테이블 생성
+    * **`create table "info" ("num" number primary key,"name" varchar2(100),"birth" date,"phone" varchar2(15));`**
+
+* `Read`
+  * 테이블 조회
+    * 선택조회 : num과 name 만 보고싶다면 **`select "num","name" from "info";`**
+    * 조건조회: **`select "name" from "info" where "num"=1;`** 
+    * 전체조회: **`select * from "info";`**
+
+* Update
+  * 데이터 수정
+    * **`update "info" set "name"='박꺽정' where "num"=1;`**
+
+* Delete
+  * 데이터 삭제 ( :heavy_exclamation_mark: where 을 안쓰면 데이터가모두 삭제될수있다.)
+    * delete from "info" where "name"='박꺽정';
+
+
+
+:heavy_check_mark: SQL 문법은 더 다양하지만  CRUD 의 기본명령어 구문만 알아도 데이터베이스를 활용할 기본 준비는 된거다. 
