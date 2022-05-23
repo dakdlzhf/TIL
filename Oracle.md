@@ -102,5 +102,10 @@ rollback 은 현재까지의 트랜잭션을 무효화 시키는 개념이다.
     * delete from "info" where "name"='박꺽정';
 
 
+:heart_decoration: tip
 
+* 현재 계정의 테이블 목록 확인하기
+  * select * from tab;
+* 현재 계정의 테이블 개수 확인하기
+  * select count(*) from tabs;
 :heavy_check_mark: SQL 문법은 더 다양하지만  CRUD 의 기본명령어 구문만 알아도 데이터베이스를 활용할 기본 준비는 된거다. 
