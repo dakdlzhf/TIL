@@ -35,4 +35,15 @@
   :star2:**실행했을때 문제없이 클래스 로딩성공이 출력되면 성공! 하지만 ClassNotFoundException 이발생되면 Build Path 에 문제!**
 
   :star2: **만약 Oracle DBMS 를 사용하지않고 다른 DBMS 를사용한다면 .jar 파일과 Driver 클래스가 다를수있다.**
+  
+  ***
+  
+  
+
+### :rocket: Step 2
+
+자바와 DB 연동이 끝났으면 이제는 데이터베이스 연동을 컨넥션 해야한다.
+
+* 접속 계정/비밀번호/접속url ( "jdbc:oracle:thin:@localhost:1521:xe" ) Oracle 접속 Url 은 정해져있다.
+  * 현재는 localhost 라서 @localhost 인데, 로컬이아니라면 사용할 해당 ip 주소가 필요하다.
 
