@@ -49,7 +49,7 @@
 
 ## Servlet Life cycle
 
-
+![servletimage](https://user-images.githubusercontent.com/80139780/170849376-8fed39b1-3157-43bf-9253-effd9a2c8e96.png)
 
 
 Servlet 에 있는 메소드 들은 모두 콜백함수이다
