@@ -47,6 +47,14 @@
 
 * xml 파일을 보면 url-pattern 으로 경로를 매핑했는데 /login00 으로 브라우저가 요청하게되면 loginServlet 이라는 서블릿이 등록되있는 class --> servlet0.LoginServlet 임으로 즉 LoginServlet 이 대응 한다는 것이다. 
 
+## Servlet Life cycle
+
+
+
+![](servletimage.png)
+
+
+
 
 Servlet 에 있는 메소드 들은 모두 콜백함수이다
 
