@@ -11,6 +11,24 @@
 
   * 웹 클라이언트의 요청을 처리할 수 있는 클래스 (Java)
 
+## Servlet
+
+
+![servletimage](https://user-images.githubusercontent.com/80139780/170849376-8fed39b1-3157-43bf-9253-effd9a2c8e96.png)
+
+1. Web Server는 HTTP request를 Web Container(Servlet Container)에게 위임한다.
+   1. web.xml 설정에서 어떤 URL과 매핑되어 있는지 확인
+   2. 클라이언트(browser)의 요청 URL을 보고 적절한 Servlet을 실행
+
+2. Web Container는 service() 메서드를 호출하기 전에 Servlet 객체를 메모리에 올린다.
+   1. Web Container는 적절한 Servlet 파일을 컴파일(.class 파일 생성)한다.
+   2. .class 파일을 메모리에 올려 Servlet 객체를 만든다.
+
+3. 메모리에 로드될 때 Servlet 객체를 초기화하는 init() 메서드가 실행된다.
+   1. Web Container는 Request가 올 때 마다 thread를 생성하여 처리한다.
+   2. 각 thread는 Servlet의 단일 객체에 대한 service() 메서드를 실행한다.
+
+
 * JSP 와 Servlet 의 차이점? 
 
   * 브라우저 입장에서 봤을때는 JSP 파일을 요청 하는것과
@@ -47,21 +65,81 @@
 
 * xml 파일을 보면 url-pattern 으로 경로를 매핑했는데 /login00 으로 브라우저가 요청하게되면 loginServlet 이라는 서블릿이 등록되있는 class --> servlet0.LoginServlet 임으로 즉 LoginServlet 이 대응 한다는 것이다. 
 
+
+
 ## Servlet Life cycle
 
-![servletimage](https://user-images.githubusercontent.com/80139780/170849376-8fed39b1-3157-43bf-9253-effd9a2c8e96.png)
+![servletlifecycle](https://user-images.githubusercontent.com/80139780/170849561-088f4f31-91b1-4a28-ac38-4b368358cc54.png)
 
-1. Web Server는 HTTP request를 Web Container(Servlet Container)에게 위임한다.
-   1. web.xml 설정에서 어떤 URL과 매핑되어 있는지 확인
-   2. 클라이언트(browser)의 요청 URL을 보고 적절한 Servlet을 실행
+클라이언트의 요청이 들어오면 WAS는 해당 요청에 맞는 Servlet이 메모리에 있는지 확인한다.
 
-2. Web Container는 service() 메서드를 호출하기 전에 Servlet 객체를 메모리에 올린다.
-   1. Web Container는 적절한 Servlet 파일을 컴파일(.class 파일 생성)한다.
-   2. .class 파일을 메모리에 올려 Servlet 객체를 만든다.
+ \- 만약 메모리에 없다면 해당 Servlet Clas를 메모리에 올린 후 (Servlet 객체 생성) init 메서드 실행
 
-3. 메모리에 로드될 때 Servlet 객체를 초기화하는 init() 메서드가 실행된다.
-   1. Web Container는 Request가 올 때 마다 thread를 생성하여 처리한다.
-   2. 각 thread는 Servlet의 단일 객체에 대한 service() 메서드를 실행한다.
+  -> 이후 service 메서드를 실행
+
+ \- 만약 메모리에 있다면 바로 service 메서드 실행
+
+ 
+
+**init()**
+
+ \- 한 번만 수행됨
+
+ \- 클라이언트(browser)의 요청에 따라 적절한 Servlet이 생성되고 이 Servlet이 메모리에 로드될 때 init() 메서드가 호출
+
+ \- 역할 : Servlet 객체를 초기화
+
+ 
+
+**service(request, response)**
+
+ \- 응답에 대한 모든 내용은 service() 메서드에 구현해야 함
+
+ \- Servlet이 수신한 모든 request에 대해 service() 메서드가 호출됨
+
+  \- HttpServlet을 상속받은 Servlet 클래스 (이하 하위 클래스) 에서 service() 메서드를 오버라이드 하지 않았다면,
+
+   그 부모인 HttpServlet의 service()가 호출됨  
+
+  \- service() 메서드는 request의 type(HTTP Method : GET, POST, PUT, DELETE 등)에 따라 적절한 메서드
+
+   (doGet, doPost, doPut, doDelete 등)를 호출함
+
+  \- 즉, 하위 클래스에서 doGet, doPost 등의 메서드를 오버라이드 해두면 HttpServlet의 service() 메서드가 요청에
+
+   맞는 메서드(하위 클래스에서 오버라이드한 메서드)를 알아서 호출할 수 있게 되는 것
+
+ \- 메서드가 return 하면 해당 thread는 제거됨
+
+ 
+
+**destory()**
+
+ \- 한 번만 수행됨
+
+ \- Web Application이 갱신되거나 WAS가 종료될 때 호출됨
+
+ \- 역할 : Servlet 객체를 메모리에서 제거
+
+ 
+
+**HttpServletRequest request 객체**
+
+ \- 사용자가 HTML Form에 입력한 내용(username과 password)을 request 객체에서 받아온다.
+  즉, HTTP 프로토콜의 Request 정보를 Servlet에게 전달
+ \- 헤더 정보, 파라미터, 쿠키, URI, URL, Body의 Stream 등을 읽어 들이는 메서드가 있다.
+ \- getHeader(“원하는 헤더 이름”) : 이 메서드를 통해 원하는 헤더 정보를 확인할 수 있다.
+ \- getParameter() : 이 메서드를 호출하여 form parameter 값을 가져온다.
+  이런 parameter 값은 URL 또는 form의 input tag를 통해서 넘어올 수 있다.
+ \- getParameterValues()
+  form parameter가 두 번 이상 나타나고 여러 개의 값을 반환할 때 이 메서드를 호출한다. (Ex. checkbox)
+
+
+
+**HttpServletResponse response 객체**
+ \- 인자의 내용에 맞게 동적인 HTML 코드를 생성하여 response 객체에 담아 반환한다.
+ \- getWriter() 메서드를 호출하여 PrintWriter 객체을 가져온 후 해당 객체에서 print, println 메서드를 실행한다.
+ \- 즉, form data를 처리한 결과를 Web Page에 생성(view 생성)하여 반환한다.
 
 
 
