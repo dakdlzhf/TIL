@@ -51,7 +51,7 @@
 
 ![servletimage](https://user-images.githubusercontent.com/80139780/170849376-8fed39b1-3157-43bf-9253-effd9a2c8e96.png)
 
-1. Web Server는 HTTP request를 Web Container(Servlet Container)에게 위임한다.
+1) Web Server는 HTTP request를 Web Container(Servlet Container)에게 위임한다.
  1) web.xml 설정에서 어떤 URL과 매핑되어 있는지 확인
  2) 클라이언트(browser)의 요청 URL을 보고 적절한 Servlet을 실행
 
