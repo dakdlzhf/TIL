@@ -3,6 +3,11 @@
 ## Servlet ?
 
 * servlet 은 HttpServlet 을 상속하여 만들어진것들을 Serveler 이라고 부른다.
+* HttpServlet
+  * 서블릿을 만들기 위해서 반드시 상속해야 할 필수 클래스
+  * Servlet 인터페이스 >  GenericServlet 추상클래스 > HttpServlet 상속구조
+
+
 
   * 웹 클라이언트의 요청을 처리할 수 있는 클래스 (Java)
 
@@ -44,13 +49,6 @@
 
 
 Servlet 에 있는 메소드 들은 모두 콜백함수이다
-
-* HttpServlet
-  * 서블릿을 만들기 위해서 반드시 상속해야 할 필수 클래스
-  * Servlet 인터페이스 >  GenericServlet 추상클래스 > HttpServlet 상속구조
-
-
-
 
 
 :heavy_check_mark: Servlet 과 JSP 파일을 목적에 맞게 구분하여 사용한다면 코드의 확장이 용이하고 유지보수면에서도 편할것이다.
