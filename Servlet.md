@@ -51,6 +51,24 @@
 
 ![servletimage](https://user-images.githubusercontent.com/80139780/170849376-8fed39b1-3157-43bf-9253-effd9a2c8e96.png)
 
+1. Web Server는 HTTP request를 Web Container(Servlet Container)에게 위임한다.
+
+ - 1) web.xml 설정에서 어떤 URL과 매핑되어 있는지 확인
+
+ - 2) 클라이언트(browser)의 요청 URL을 보고 적절한 Servlet을 실행
+
+2. Web Container는 service() 메서드를 호출하기 전에 Servlet 객체를 메모리에 올린다.
+
+ - 1) Web Container는 적절한 Servlet 파일을 컴파일(.class 파일 생성)한다.
+
+ - 2) .class 파일을 메모리에 올려 Servlet 객체를 만든다.
+
+ - 3) 메모리에 로드될 때 Servlet 객체를 초기화하는 init() 메서드가 실행된다.
+
+3. Web Container는 Request가 올 때 마다 thread를 생성하여 처리한다.
+
+ - 각 thread는 Servlet의 단일 객체에 대한 service() 메서드를 실행한다.
+
 
 Servlet 에 있는 메소드 들은 모두 콜백함수이다
 
