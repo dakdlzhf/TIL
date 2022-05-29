@@ -81,7 +81,7 @@
 
  
 
-`**init()**`
+**`init()`**
 
  \- 한 번만 수행됨
 
@@ -91,7 +91,7 @@
 
  
 
-`**service(request, response)**`
+**`service(request, response)`**
 
  \- 응답에 대한 모든 내용은 service() 메서드에 구현해야 함
 
@@ -113,7 +113,7 @@
 
  
 
-`**destory()**`
+**`destory()`**
 
  \- 한 번만 수행됨
 
