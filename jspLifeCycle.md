@@ -83,5 +83,35 @@
   * 다만 jsp 파일이 수정된다면 객체를 제거후 다시 생성하기떄문에 멤버변수인 num1 도 초기화된다.
 
 
+### :100: **요점정리**
 
+`JSP LifeCycle`
+
+:one: 브라우저에서 JSP 으로 요청이들어온다
+
+:two: Tomcat 서버가 JSP 를 JAVA 로 생성한다.
+
+:three: JDK 안에 있는 컴파일러가 .java 파일을 .class 로 컴파일해서 실행환경(JRE) 에의해 메모리에 등록된다
+
+:four: 인스턴스 (객체) 가 만들어진 이때의 객체가 서블릿이고 서블릿 클래스다
+
+:five: 같은 JSP 요청이 들어온다면 이미 만들어져있는 서블릿 객체가 있음을 확인하고 Service 하여 Response 한다
+
+:six: 변경되거나,다른 JSP 요청이 들어온다면 다시 서블릿 객체를 만들기위해 :two: ~ :four: 번과정을 진행하여 Service 한다
+
+
+
+
+
+:star: Servlet 과의 차이점 맛보기 
+
+`Servlet LifeCycle`
+
+:one: 서블릿으로 요청이들어온다 요청된 URL ( 특정명령어 ) 를 Tomcat 이 어떤 Servlet 을 동작시키면 좋을지 분석한다.
+
+:two: 서블릿은 HttpServlet 을 상속하고 있어야 Request 를 처리할수 있다, 서블릿은 Service or Action or DAO<=>DB 를 이용한다.
+
+:three: JSP 도 서블릿이지만 브라우저의 화면에 응답하는 용도 ( View ) 로 구분하여 이용한다.
+
+:four: 서블릿에서 처리후 별도로 보여줄화면이있을때는 redirect 할수 있다.
 
