@@ -46,7 +46,7 @@ public class BestStar {
 
 💡 추후 @Autowired 어노테이션이 스프링에서 어떻게 추상화돼있고 그 내부에서 어떤 동작원리를 갖는지 디버깅 스택 트레이싱을 해보며 분석한 글을 포스팅 할테니 참고바란다.
 
-먼저 궁금하신 분들은 Github에 토이프로젝트로 정리한 [이 링크](https://github.com/HwangWonGyu/news/pull/20#discussion_r566839551)를 참고바란다.
+
 
  
 
