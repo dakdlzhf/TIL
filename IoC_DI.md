@@ -41,7 +41,7 @@ public class BestStar {
 
     private Star star;
 
-    public BestStar()
+    public BestStar(){
         star = new Star();
         // BestStar 생성자에서 Star 클래스와의 의존관계를 애플리케이션 단에서 직접 설정하고 있다.
     }
