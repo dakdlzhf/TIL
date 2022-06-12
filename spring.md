@@ -132,5 +132,196 @@
   }
   
   ```
+  
+
+### 스프링 빈 조회 -기본
+
+스프링 컨테이너에서`스프링 빈을 찾는 가장 기본적인 조회방법`
+
+* `ac.getBean(빈이름,타입)`
+* `ac.getBean(타입)`
+* 조회 대상 스프링 빈이 없으면 예외 발생
+  * `NoSuchBeanDefinitionException: No bean named 'xxxxx' avilable`
+
+
+
+```java
+package hello.core.beanfind;
+
+import hello.core.AppConfig;
+import hello.core.member.MemberService;
+import hello.core.member.MemberServiceImpl;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ApplicationContextBasicFindTest {
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+    @Test
+    @DisplayName("빈 이름으로 조회")
+    void findBeanByName(){
+        MemberService memberService = ac.getBean("memberService", MemberService.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+
+    @Test
+    @DisplayName(" 이름없이 타입으로만 조회")
+    void findBeanByType(){
+        MemberService memberService = ac.getBean( MemberService.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+
+    @Test   
+    @DisplayName("구체 타입으로 조회") 
+
+    void findBeanByName2(){
+        MemberService memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+            //구체타입으로 조회를 하면 인터페이스에 의존하는게 아닌 구현에 의존하기에 유연성이 낮아진다
+    }
+
+    @Test
+    @DisplayName("빈 이름으로 조회 실패")
+    void fintBeanByNameX(){
+        //ac.getBean("xxxxx",MemberService.class);
+
+        assertThrows(NoSuchBeanDefinitionException.class,
+                ()->ac.getBean("xxxxx", MemberService.class));
+    }
+}
+
+```
+
+
+
+### 스프링 빈 조회 - 동일한 타입이 둘 이상
+
+* 타입으로 조회시 같은 타입의 스프링 빈이 둘 이상이면 오류가 발생한다. 이때는 빈 이름을 지정하자
+* `ac.getBeansofType()` 을 사용하면 해당 타입의 모든 빈을 조회할 수있다. 
+
+```java
+package hello.core.beanfind;
+
+import hello.core.AppConfig;
+import hello.core.discount.DiscountPolicy;
+import hello.core.member.Member;
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+public class ApplicationContextSameBeanFindTest {
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class);
+
+    @Test
+    @DisplayName("타입으로 조회시 같은 타입이 둘 이상 있으면, 중복 오류가 발생한다.")
+    void findBeanByTypeDuplication() {
+        MemberRepository bean = ac.getBean(MemberRepository.class);
+    }
+    @Configuration
+    static class SameBeanConfig{
+
+        @Bean
+        public MemberRepository memberRepository1(){
+            return new MemoryMemberRepository();
+        }
+
+        @Bean
+        public MemberRepository memberRepository2(){
+            return new MemoryMemberRepository();
+        }
+    }
+}
+
+
+```
+
+
+
+* 타입으로 조회시 동일한 타입이 둘이상 있다면 Exception 발생!
+  * `NoUniqueBeanDefinitionException`
+
+
+
+```java
+package hello.core.beanfind;
+
+import hello.core.AppConfig;
+import hello.core.discount.DiscountPolicy;
+import hello.core.member.Member;
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ApplicationContextSameBeanFindTest {
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class);
+
+
+    @Test
+    @DisplayName("타입으로 조회시 같은 타입이 둘 이상 있으면, 중복 오류가 발생한다.")
+    void findBeanByTypeDuplication() {
+        //MemberRepository bean = ac.getBean(MemberRepository.class);
+
+        assertThrows(NoUniqueBeanDefinitionException.class,
+                ()->ac.getBean(MemberRepository.class));
+    }
+
+    @Test
+    @DisplayName("타입으로 조회시 같은 타입이 둘 이상 있으면, 빈 이름을 지정하면된다")
+    void findBeanByName(){
+        MemberRepository memberRepository = ac.getBean("memberRepository1", MemberRepository.class);
+        assertThat(memberRepository).isInstanceOf(MemberRepository.class);
+    }
+
+    @Test
+    @DisplayName("특정 타입을 모두 조회하기")
+    void findAllBeanByType(){
+        Map<String, MemberRepository> beansOfType = ac.getBeansOfType(MemberRepository.class);
+        for (String key : beansOfType.keySet()) {
+            System.out.println("key = " + key +" value = " + beansOfType.get(key));
+        }
+        System.out.println("beansOfType = " + beansOfType);
+        assertThat(beansOfType.size()).isEqualTo(2);
+    }
+
+    @Configuration
+    static class SameBeanConfig{
+
+        @Bean
+        public MemberRepository memberRepository1(){
+            return new MemoryMemberRepository();
+        }
+
+        @Bean
+        public MemberRepository memberRepository2(){
+            return new MemoryMemberRepository();
+        }
+    }
+}
+
+
+```
+
+
 
   
