@@ -185,7 +185,7 @@ public class ApplicationContextBasicFindTest {
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
             //구체타입으로 조회를 하면 인터페이스에 의존하는게 아닌 구현에 의존하기에 유연성이 낮아진다
     }
-
+ 
     @Test
     @DisplayName("빈 이름으로 조회 실패")
     void fintBeanByNameX(){
