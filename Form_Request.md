@@ -8,7 +8,7 @@
 
   * form.jsp 파일 ( 브라우저에서 form 태그에 입력한다면  )
 
-    ```javascript
+    ```javascript  
     <body>
     	<form action="requestParameter.jsp">
     		<input type="text" name="name" placeholder="문자열 입력">
